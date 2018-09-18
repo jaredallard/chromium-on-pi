@@ -17,6 +17,6 @@ RUN addgroup --gid 1000 pi \
 USER pi
 
 COPY bin/takex /usr/bin/takex
-COPY bin/start-chromium
+COPY bin/start-chromium /usr/bin/start-chromium
 
 ENTRYPOINT ["/usr/bin/takex", "/usr/bin/start-chromium"]
