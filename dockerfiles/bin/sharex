@@ -22,4 +22,4 @@ echo "$DISPLAY" > /mnt/xauth/display
 out "shared xauth successfully"
 
 out "sharing X over TCP"
-socat -d -d TCP-LISTEN:6000,fork,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
+exec socat -d -d TCP-LISTEN:6000,fork,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
