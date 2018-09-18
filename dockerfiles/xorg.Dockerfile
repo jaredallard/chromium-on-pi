@@ -15,4 +15,6 @@ RUN addgroup --gid 1000 pi \
 
 USER pi
 
-ENTRYPOINT [ "/usr/bin/startx" ]
+COPY bin/sharex /usr/bin/sharex
+
+ENTRYPOINT [ "/usr/bin/sharex" ]

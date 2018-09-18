@@ -15,3 +15,9 @@ out "sharex delivered!"
 
 export DISPLAY="$(cat /mnt/xauth/display)"
 cp /mnt/xauth/.Xauthority "$HOME/.Xauthority"
+
+PROGRAM="$1"
+shift
+
+# launch the application
+exec "$PROGRAM" $@

@@ -5,7 +5,7 @@ MAINTAINER Jared Allard <jaredallard@outlook.com>
 
 # hadolint ignore=DL3015,DL3008
 RUN apt-get update \
-&&  apt-get install -y ca-certificates ttf-mscorefonts-installer libexif-dev libpango1.0-0 libv4l-0 chromium-browser libx11-xcb1  \
+&&  apt-get install -y ca-certificates ttf-mscorefonts-installer libexif-dev libpango1.0-0 libv4l-0 chromium-browser libx11-xcb1 lsb-release \
 &&  apt-get clean \
 &&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -16,5 +16,7 @@ RUN addgroup --gid 1000 pi \
 
 USER pi
 
-ENTRYPOINT ["/usr/bin/chromium", "--no-sandbox",\
+COPY bin/takex /usr/bin/takex
+
+ENTRYPOINT ["/usr/bin/takex", "/usr/bin/chromium-browser", "--no-sandbox",\
             "--user-data-dir=/tmp", "--disable-setuid-sandbox"]
