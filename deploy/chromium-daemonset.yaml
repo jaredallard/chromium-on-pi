@@ -10,10 +10,7 @@ spec:
     matchLabels:
       app: chromium
   updateStrategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
-
+    type: OnDelete
   template:
     metadata:
       labels:
@@ -22,15 +19,23 @@ spec:
       hostNetwork: true
       containers:
       - name: chromium
-        image: jaredallard/chromium-on-docker:v1.0.0
+        image: jaredallard/chromium-rpi:v1.0.0
         imagePullPolicy: IfNotPresent
+        securityContext:
+          runAsUser: 1000
+          runAsNonRoot: true
+        args:
+        - --kiosk "https://noc.azuqua.com"
         volumeMounts:
         - name: xauth
           mountPath: /mnt/xauth
       - name: xorg
         image: jaredallard/xorg-rpi:v1.0.0
         imagePullPolicy: IfNotPresent
-        privileged: true
+        securityContext:
+          runAsUser: 0
+          runAsNonRoot: false
+          privileged: true
         volumeMounts:
         - name: xauth
           mountPath: /mnt/xauth
