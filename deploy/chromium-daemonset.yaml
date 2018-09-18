@@ -35,7 +35,7 @@ spec:
         - name: xauth
           mountPath: /mnt/xauth
       - name: xorg
-        image: jaredallard/xorg-rpi:v1.0.0
+        image: jaredallard/xorg-rpi:v1.0.1
         imagePullPolicy: IfNotPresent
         securityContext:
           runAsUser: 0
