@@ -17,6 +17,6 @@ RUN addgroup --gid 1000 pi \
 USER pi
 
 COPY bin/takex /usr/bin/takex
+COPY bin/start-chromium
 
-ENTRYPOINT ["/usr/bin/takex", "/usr/bin/chromium-browser", "--no-sandbox",\
-            "--user-data-dir=/tmp", "--disable-setuid-sandbox"]
+ENTRYPOINT ["/usr/bin/takex", "/usr/bin/start-chromium"]

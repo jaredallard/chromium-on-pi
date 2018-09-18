@@ -24,8 +24,13 @@ spec:
         securityContext:
           runAsUser: 1000
           runAsNonRoot: true
-        args:
-        - --kiosk "https://noc.azuqua.com"
+        env:
+        - name: KIOSK_URL
+          valueFrom:
+            configMapRef:
+              name: kiosk
+              key: url
+              optional: true
         volumeMounts:
         - name: xauth
           mountPath: /mnt/xauth

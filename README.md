@@ -14,6 +14,12 @@ See https://github.com/jaredallard/docker-parsec for a sum-up of how this is pos
  * easy to sync state of "kiosk" machines
  * docker is fun
 
+## LEFTOVER
+
+* clear screen when containers are 💀
+* better URL changes
+* somehow authenticate w/ webpages? idk
+
 ## License
 
 MIT
