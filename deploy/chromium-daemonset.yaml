@@ -27,7 +27,7 @@ spec:
         env:
         - name: KIOSK_URL
           valueFrom:
-            configMapRef:
+            configMapKeyRef:
               name: kiosk
               key: url
               optional: true
