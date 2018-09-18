@@ -16,11 +16,10 @@ spec:
       labels:
         app: chromium
     spec:
-      hostNetwork: true
       containers:
       - name: chromium
         image: jaredallard/chromium-rpi:v1.0.1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         securityContext:
           runAsUser: 1000
           runAsNonRoot: true
@@ -36,11 +35,15 @@ spec:
           mountPath: /mnt/xauth
       - name: xorg
         image: jaredallard/xorg-rpi:v1.0.1
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         securityContext:
           runAsUser: 0
           runAsNonRoot: false
           privileged: true
+        ports:
+        - name: xorg
+          protocol: TCP
+          containerPort: 6000
         volumeMounts:
         - name: xauth
           mountPath: /mnt/xauth

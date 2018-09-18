@@ -12,14 +12,13 @@ startx &
 sleep 5
 
 out "sharing xauth with any other sidecars"
-export DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
-out "debug: using display $DISPLAY"
+DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
 
-xhost "si:usergroup:1000"
+out "display $DISPLAY"
 xauth extract - "${DISPLAY}" > /mnt/xauth/.Xauthority
 echo "$DISPLAY" > /mnt/xauth/display
 
 out "shared xauth successfully"
 
 out "sharing X over TCP"
-exec socat -d -d TCP-LISTEN:6000,fork,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
+exec socat -d -d TCP-LISTEN:6000,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
