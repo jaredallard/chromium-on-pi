@@ -9,7 +9,7 @@ out() {
 }
 
 startx &
-sleep 5
+sleep 10
 
 out "sharing xauth with any other sidecars"
 DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
