@@ -22,4 +22,5 @@ out "DISPLAY: $DISPLAY"
   --disable-nacl \
   --noerrdialogs \
   --no-first-run \
+  --disable-save-password-bubble \
   --kiosk "$KIOSK_URL"
