@@ -13,7 +13,7 @@ done
 
 out "sharex delivered!"
 
-export DISPLAY="$(cat /mnt/xauth/display)"
+export DISPLAY="localhost$(cat /mnt/xauth/display)"
 cp /mnt/xauth/.Xauthority "$HOME/.Xauthority"
 
 PROGRAM="$1"

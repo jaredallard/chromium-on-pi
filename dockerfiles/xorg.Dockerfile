@@ -5,7 +5,7 @@ MAINTAINER Jared Allard <jaredallard@outlook.com>
 
 # hadolint ignore=DL3015,DL3008
 RUN apt-get update \
-&&  apt-get install -y xorg jwm \
+&&  apt-get install -y xorg jwm socat \
 &&  apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add the pi user, and add it to the video group

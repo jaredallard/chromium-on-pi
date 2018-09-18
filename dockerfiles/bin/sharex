@@ -16,7 +16,10 @@ export DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' |
 out "debug: using display $DISPLAY"
 
 xhost "si:usergroup:1000"
-xauth extract - ${DISPLAY} > /mnt/xauth/.Xauthority
+xauth extract - "${DISPLAY}" > /mnt/xauth/.Xauthority
 echo "$DISPLAY" > /mnt/xauth/display
 
 out "shared xauth successfully"
+
+out "sharing X over TCP"
+socat -d -d TCP-LISTEN:6000,fork,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
