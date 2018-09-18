@@ -12,7 +12,7 @@ startx &
 sleep 10
 
 out "sharing xauth with any other sidecars"
-DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
+export DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
 
 out "DEBUG: xauth list"
 xauth list
