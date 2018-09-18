@@ -20,7 +20,7 @@ users:
     groups: users,docker,video,input
     lock_passwd: false
     ssh-authorized-keys:
-    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMVHPLvQKY+ZOTFxKxQtKg7tmr3tbVJZbFneS3ZMnzm1 jared@killua
+    - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMVHPLvQKY+ZOTFxKxQtKg7tmr3tbVJZbFneS3ZMnzm1 jared@killuaw
     chpasswd: { expire: false }
 
 # # Set the locale of the system
@@ -77,8 +77,3 @@ runcmd:
   - 'echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list'
   - 'apt-get update'
   - 'apt-get install -y kubeadm'
-
-  # Configure kubeadm
-  - 'kubeadm init --pod-network-cidr 10.244.0.0/16'
-  - 'mkdir -p /home/pirate/.kube && cp /etc/kubernetes/admin.conf /home/pirate/.kube/config && chown -R 1000:1000 /home/pirate/.kube'
-  - 'KUBECONFIG=/home/pirate/.kube/config kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml'

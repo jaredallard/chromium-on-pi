@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#
+# startx + sharing is caring
+
+set -e
+
+out() {
+  echo "[SHAREX] $*"
+}
+
+startx &
+sleep 5
+
+out "sharing xauth with any other sidecars"
+export DISPLAY=":$(xauth list | awk '{ print $1 }' | awk -F ':' '{ print $2 }' | head -n1)"
+out "debug: using display $DISPLAY"
+
+xhost "si:usergroup:1000"
+xauth extract - ${DISPLAY} > /mnt/xauth/.Xauthority
+echo "$DISPLAY" > /mnt/xauth/display
+
+out "shared xauth successfully"

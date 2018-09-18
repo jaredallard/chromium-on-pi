@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# consume sharedx
+
+out() {
+  echo "[TAKEX] $*"
+}
+
+while [ ! -e "/mnt/xauth/display" ]; do
+  out "waiting for sharex ..."
+  sleep 2
+done
+
+out "sharex delivered!"
+
+export DISPLAY="$(cat /mnt/xauth/display)"
+cp /mnt/xauth/.Xauthority "$HOME/.Xauthority"

@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: DaemonSet
+metadata:
+  annotations:
+  labels:
+    app: chromium
+  name: chromium
+spec:
+  selector:
+    matchLabels:
+      app: chromium
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        app: chromium
+    spec:
+      hostNetwork: true
+      containers:
+      - name: chromium
+        image: jaredallard/chromium-on-docker:v1.0.0
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - name: xauth
+          mountPath: /mnt/xauth
+      - name: xorg
+        image: jaredallard/xorg-rpi:v1.0.0
+        imagePullPolicy: IfNotPresent
+        privileged: true
+        volumeMounts:
+        - name: xauth
+          mountPath: /mnt/xauth
+      volumes:
+      - name: xauth
+        emptyDir: {}

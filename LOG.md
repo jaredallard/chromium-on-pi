@@ -17,33 +17,27 @@ that will greatly simplify spinning up nodes.
 $ flash --userdata cloud-init/masters.yaml https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip 
 ```
 
-2. SSH into the master node you just created, 
+2. Boot it up! (cloud-init will configure a kubernetes cluster 🙀)
+
+### Setting up a node
+
+1. Configure the OS
 
 ```bash
-$ ssh pirate@master-01.local
-# password is 'hypriot'
+$ flash --hostname <change-me>--userdata cloud-init/nodes.yaml https://github.com/hypriot/image-builder-rpi/releases/download/v1.9.0/hypriotos-rpi-v1.9.0.img.zip 
 ```
 
-3. Install kubeadm
+2. Boot it up (shell into it and wait for kubeadm to be installed)
 
 ```bash
-curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
-echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-sudo apt update
-sudo apt install kubeadm
+# on the master
+$ kubeadm token create
+
+# on the nodes
+$ ping master-01 # or master-0.local
+$ kubeadm join --token <token> master-01 # or the IP if that doesn't resolve
 ```
 
-4. Configure Kubernetes
+#### Optional
 
-```bash
-sudo kubeadm init --pod-network-cidr 10.244.0.0/16
-sudo cp /etc/kubernetes/admin.conf "$HOME/"
-sudo chown $(id -u):$(id -g) "$HOME/admin.conf"
-export KUBECONFIG="$HOME/admin.conf"
-```
-
-5. Install flannel
-
-```bash
-$ kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-```
+Configure WiFI: see the `cloud-init/nodes.yaml`
