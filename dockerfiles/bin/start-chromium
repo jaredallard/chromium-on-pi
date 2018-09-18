@@ -7,6 +7,7 @@ out() {
 }
 
 out "launching URL: $KIOSK_URL"
+out "DISPLAY: $DISPLAY"
 
 /usr/bin/chromium-browser \
   --no-sandbox --disable-setuid-sandbox \
@@ -18,5 +19,6 @@ out "launching URL: $KIOSK_URL"
   --disk-cache-dir=/tmp/cache/ \
   --user-data-dir=/tmp/user_data/ \
   --start-maximized \
+  --disable-nacl \
   --noerrdialogs \
   --kiosk "$KIOSK_URL"
