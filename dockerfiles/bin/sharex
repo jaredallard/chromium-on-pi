@@ -25,4 +25,4 @@ out "shared xauth successfully"
 xhost +
 
 out "sharing X over TCP (no-fork)"
-exec socat TCP-LISTEN:6000,bind=localhost UNIX-CONNECT:/tmp/.X11-unix/X0
+exec socat TCP-LISTEN:6000,bind=0.0.0.0 UNIX-CONNECT:/tmp/.X11-unix/X0

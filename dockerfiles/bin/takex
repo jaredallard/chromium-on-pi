@@ -13,10 +13,8 @@ done
 
 out "sharex delivered!"
 
-export DISPLAY="localhost$(cat /mnt/xauth/display)"
-cp /mnt/xauth/.Xauthority "$HOME/.Xauthority"
-
-out "configured xorg access at: $HOME"
+export DISPLAY="$(hostname)$(cat /mnt/xauth/display)"
+cp -v /mnt/xauth/.Xauthority "$HOME/.Xauthority"
 
 PROGRAM="$1"
 shift
