@@ -21,4 +21,5 @@ out "DISPLAY: $DISPLAY"
   --start-maximized \
   --disable-nacl \
   --noerrdialogs \
+  --no-first-run \
   --kiosk "$KIOSK_URL"
