@@ -16,5 +16,6 @@ RUN addgroup --gid 1000 pi \
 USER pi
 
 COPY bin/sharex /usr/bin/sharex
+COPY etc/xorg.conf /etc/X11/xorg.conf
 
 ENTRYPOINT [ "/usr/bin/sharex" ]
